@@ -11,21 +11,28 @@ Confirm the current user and hostname.
 ```bash
 whoami
 hostname
+```
 
 ## 2. Review Network Configuration
 
+```bash
 ip a
 
+```
 ## 3. Verify Connectivity
 
+```bash
 ping -c 3 <target-ip>
 
+```
 ## 4. Enumerate Exposed Services
 
 Scan the target system to identify open ports, services, and service versions.
 
 ```bash
 nmap -sV <target-ip>
+
+```
 
 ## 5. Review SSH Authentication Logs
 
@@ -34,6 +41,7 @@ Review SSH service logs for successful logins, failed authentication attempts, a
 ```bash
 sudo journalctl -u ssh
 
+```
 ## 6. Narrow the Investigation Timeline
 
 Review recent SSH activity within a specific time window to focus the investigation on relevant events.
@@ -41,6 +49,7 @@ Review recent SSH activity within a specific time window to focus the investigat
 ```bash
 sudo journalctl -u ssh --since "-30 min" --no-pager
 
+```
 ## 7. Filter for Suspicious Indicators
 
 Filter recent authentication logs for a specific IP address or other indicator identified during the investigation.
@@ -48,7 +57,7 @@ Filter recent authentication logs for a specific IP address or other indicator i
 ```bash
 sudo journalctl -u ssh --since "-30 min" --no-pager | grep "<target-ip>"
 
-
+```
 ## 8. Inspect Running Processes
 
 Review running processes for unexpected programs, unusual user activity, or processes that may correlate with other evidence.
@@ -56,6 +65,7 @@ Review running processes for unexpected programs, unusual user activity, or proc
 ```bash
 ps aux
 
+```
 ## 9. Review User Accounts
 
 Identify users currently logged into the system and review local user accounts for unexpected or unfamiliar accounts.
@@ -64,6 +74,7 @@ Identify users currently logged into the system and review local user accounts f
 who
 cat /etc/passwd
 
+```
 ## 10. Verify Fail2ban
 
 Check the overall Fail2ban status and inspect the SSH jail for failed authentication attempts and banned IP addresses.
@@ -72,6 +83,7 @@ Check the overall Fail2ban status and inspect the SSH jail for failed authentica
 sudo fail2ban-client status
 sudo fail2ban-client status sshd
 
+```
 ## 11. Verify nftables Firewall Rules
 
 Review the active nftables ruleset to verify firewall configuration and network enforcement.
@@ -79,6 +91,7 @@ Review the active nftables ruleset to verify firewall configuration and network 
 ```bash
 sudo nft list ruleset
 
+```
 ## 12. Initial Analyst Assessment
 
 After completing the initial checks, review the collected evidence and classify findings as expected, noteworthy, or suspicious.
